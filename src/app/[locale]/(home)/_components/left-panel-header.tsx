@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { LibraryBig, Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 export default function LeftPanelHeader() {
+  const t = useTranslations("HomePage");
   return (
     <div className="p-4 flex justify-between items-center">
       <Button
@@ -11,7 +13,7 @@ export default function LeftPanelHeader() {
         iconSize={"sm"}
       >
         <LibraryBig />
-        <p className="text-base font-bold">Your Library</p>
+        <p className="text-base font-bold">{t("library")}</p>
       </Button>
       <Button
         size={"icon"}

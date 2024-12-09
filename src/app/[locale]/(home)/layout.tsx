@@ -4,10 +4,10 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import React from "react";
+import LeftPanelFooter from "./_components/left-panel-footer";
 import LeftPanelHeader from "./_components/left-panel-header";
 import LeftPanelMain from "./_components/left-panel-main";
 import Navigation from "./_components/navigation";
-import LeftPanelFooter from "./_components/left-panel-footer";
 
 export default function HomeLayout({
   children,
