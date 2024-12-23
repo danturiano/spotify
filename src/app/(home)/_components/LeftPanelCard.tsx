@@ -8,11 +8,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-interface CardProps {
+type CardProps = {
   children: ReactNode;
   title: string;
   description: string;
-}
+};
 
 export default function LeftPanelCard({
   children,

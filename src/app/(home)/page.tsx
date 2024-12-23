@@ -1,5 +1,11 @@
-import React from "react";
+import PopularAlbum from "./_components/PopularAlbum";
+import PopularArtist from "./_components/PopularArtist";
 
 export default function Home() {
-  return <div>two</div>;
+  return (
+    <div className="p-4 w-full space-y-8">
+      <PopularArtist />
+      <PopularAlbum />
+    </div>
+  );
 }
