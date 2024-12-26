@@ -4,15 +4,10 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import React, { useState } from "react";
+import { SpotifyArtist } from "../_lib/types";
 
 type CardProps = {
-  artist: {
-    bio: string | null;
-    created_at: string;
-    id: string;
-    name: string;
-    photo_url: string | undefined;
-  };
+  artist: SpotifyArtist
   photoUrl: string | undefined;
 };
 

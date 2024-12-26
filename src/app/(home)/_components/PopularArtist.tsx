@@ -1,9 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { getPopularArtist } from "@/lib/data-service";
 import PopularArtistCard from "./PopularArtistCard";
+import { getPopularArtist } from "../_lib/actions";
 
 export default async function PopularArtist() {
-  const { data: artists } = await getPopularArtist();
+
+  const artists = await getPopularArtist();
+  if (!artists) {
+    return null;
+  }
 
   return (
     <div>
@@ -17,7 +21,7 @@ export default async function PopularArtist() {
       </div>
       <div className="flex">
         {artists.map((artist) => {
-          const photoUrl = artist.photo_url;
+          const photoUrl = artist.images[0]?.url;
           return (
             <PopularArtistCard
               artist={artist}

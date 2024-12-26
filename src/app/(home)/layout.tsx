@@ -11,9 +11,9 @@ import LeftPanelMain from "./_components/LeftPanelMain";
 import Navigation from "./_components/Navigation";
 
 export default function HomeLayout({
-  children,
+  children,  
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <div className="h-screen flex flex-col">

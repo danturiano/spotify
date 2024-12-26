@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-key */
 import { Button } from "@/components/ui/button";
-import { getPopularAlbum } from "@/lib/data-service";
+
 import PopularAlbumCard from "./PopularAlbumCard";
 
 export default async function PopularAlbum() {
-  const { data: albums } = await getPopularAlbum();
+  // const { data: albums } = await getPopularAlbum();
 
   return (
     <div>
@@ -16,12 +16,12 @@ export default async function PopularAlbum() {
           Show all
         </Button>
       </div>
-      <div className="flex">
+      {/* <div className="flex">
         {albums.map((album) => {
           const photoUrl = album.cover_url;
           return <PopularAlbumCard album={album} photoUrl={photoUrl} />;
         })}
-      </div>
+      </div> */}
     </div>
   );
 }
