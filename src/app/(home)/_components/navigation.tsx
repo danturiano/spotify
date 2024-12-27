@@ -1,6 +1,6 @@
-import Logo from "@/components/logo";
-import HomeButton from "./home-button";
-import SearchBar from "./search-bar";
+import Logo from "@/components/Logo";
+import HomeButton from "./HomeButton";
+import SearchBar from "./SearchBar";
 import { Button } from "@/components/ui/button";
 
 export default function Navigation() {

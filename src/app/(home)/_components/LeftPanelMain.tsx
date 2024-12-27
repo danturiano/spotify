@@ -1,5 +1,5 @@
 import React from "react";
-import LeftPanelCard from "./left-panel-card";
+import LeftPanelCard from "./LeftPanelCard";
 import { Button } from "@/components/ui/button";
 
 const data = {

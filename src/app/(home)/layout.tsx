@@ -4,15 +4,16 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import React from "react";
-import LeftPanelHeader from "./_components/left-panel-header";
-import LeftPanelMain from "./_components/left-panel-main";
-import Navigation from "./_components/navigation";
-import LeftPanelFooter from "./_components/left-panel-footer";
+import CallToAction from "./_components/CallToAction";
+import LeftPanelFooter from "./_components/LeftPanelFooter";
+import LeftPanelHeader from "./_components/LeftPanelHeader";
+import LeftPanelMain from "./_components/LeftPanelMain";
+import Navigation from "./_components/Navigation";
 
 export default function HomeLayout({
-  children,
+  children,  
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <div className="h-screen flex flex-col">
@@ -38,12 +39,16 @@ export default function HomeLayout({
           </ResizablePanel>
           <ResizableHandle className="bg-background" />
           <ResizablePanel defaultSize={78} minSize={78}>
-            <div className="flex h-full items-center bg-gradient-to-t from-primary from-70% to-accent rounded-lg justify-center p-6">
-              <span className="font-semibold">{children}</span>
+            <div className="flex h-full bg-gradient-to-t from-primary from-70% to-accent rounded-lg">
+              {children}
             </div>
           </ResizablePanel>
         </ResizablePanelGroup>
       </main>
+      <footer></footer>
+      <div className="p-2">
+        <CallToAction />
+      </div>
     </div>
   );
 }
