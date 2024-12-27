@@ -8,7 +8,7 @@ import CallToAction from "./_components/CallToAction";
 import LeftPanelFooter from "./_components/LeftPanelFooter";
 import LeftPanelHeader from "./_components/LeftPanelHeader";
 import LeftPanelMain from "./_components/LeftPanelMain";
-import Navigation from "./_components/Navigation";
+import Navigation from "./_components/navigation";
 
 export default function HomeLayout({
   children,  
