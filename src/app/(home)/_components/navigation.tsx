@@ -1,4 +1,4 @@
-import Logo from "@/components/Logo";
+import Logo from "@/components/logo";
 import HomeButton from "./HomeButton";
 import SearchBar from "./SearchBar";
 import { Button } from "@/components/ui/button";
