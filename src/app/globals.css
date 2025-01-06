@@ -71,3 +71,13 @@ body {
 		@apply bg-background text-foreground;
 	}
 }
+
+.scrollbar::-webkit-scrollbar {
+	width: 12px;
+	max-height: 12px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+	background: #3b3b3b;
+	max-height: 12px;
+}
