@@ -57,6 +57,8 @@ export async function getTopArtist(accessToken: string | undefined) {
 		const response = await fetch(
 			`https://api.spotify.com/v1/artists?ids=${artistIds.join(',')}`,
 			{
+				cache: 'force-cache',
+				next: { revalidate: 3600 },
 				headers: {
 					Authorization: `Bearer ${accessToken}`,
 				},
@@ -91,17 +93,16 @@ export async function getTopArtist(accessToken: string | undefined) {
 
 export async function getPlaylist(playlist_id: string) {
 	const session = await auth();
-	console.log(session);
 	if (!session) {
 		throw new Error('No session found');
 	}
-
-	console.log(playlist_id);
 
 	try {
 		const response = await fetch(
 			`https://api.spotify.com/v1/playlists/${playlist_id}`,
 			{
+				cache: 'force-cache',
+				next: { revalidate: 3600 },
 				headers: {
 					Authorization: `Bearer ${session.accessToken}`,
 				},
@@ -122,7 +123,6 @@ export async function getPlaylist(playlist_id: string) {
 
 export async function getUserPlaylist() {
 	const session = await auth();
-	console.log(session);
 	if (!session) {
 		throw new Error('No session found');
 	}
@@ -133,6 +133,8 @@ export async function getUserPlaylist() {
 		const response = await fetch(
 			`https://api.spotify.com/v1/users/${user_id}/playlists?offset=0&limit=20`,
 			{
+				cache: 'force-cache',
+				next: { revalidate: 3600 },
 				headers: {
 					Authorization: `Bearer ${session.accessToken}`,
 				},
@@ -160,6 +162,8 @@ export async function getPlaylistTracks(playlist_id: string) {
 		const response = await fetch(
 			`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`,
 			{
+				cache: 'force-cache',
+				next: { revalidate: 3600 },
 				headers: {
 					Authorization: `Bearer ${session.accessToken}`,
 				},
