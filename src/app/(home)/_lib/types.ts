@@ -28,7 +28,7 @@ export type SpotifyPlaylist = {
 	primary_color: unknown;
 	public: boolean;
 	snapshot_id: string;
-	tracks: { href: string; total: number };
+	tracks: { href: string; total: number; items: Track[] };
 	type: string;
 	uri: string;
 };

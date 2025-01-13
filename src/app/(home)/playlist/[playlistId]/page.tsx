@@ -1,5 +1,6 @@
-import { getPlaylist, getPlaylistTracks } from '../../_lib/data-service';
+import { getPlaylist } from '../../_lib/data-service';
 import PlaylistHeader from '../_components/PlaylistHeader';
+import PlaylistTracks from '../_components/PlaylistTracks';
 
 export default async function Page({
 	params,
@@ -8,13 +9,11 @@ export default async function Page({
 }) {
 	const playlistId = (await params).playlistId;
 	const playlist = await getPlaylist(playlistId);
-	const tracks = await getPlaylistTracks(playlistId);
-
-	const firstTrackImage = tracks.items[0].track.album.images[0].url;
 
 	return (
-		<div className="w-full">
-			<PlaylistHeader playlist={playlist} firstTrackImage={firstTrackImage} />
+		<div className="w-full relative">
+			<PlaylistHeader playlist={playlist} />
+			<PlaylistTracks />
 		</div>
 	);
 }
