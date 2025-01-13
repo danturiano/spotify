@@ -2,6 +2,7 @@
 
 import { Avatar, AvatarImage } from '@radix-ui/react-avatar';
 import { Play } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SpotifyPlaylist } from '../../_lib/types';
@@ -13,15 +14,14 @@ type PlaylistProps = {
 
 export default function PlaylistCard({ playlist, photoUrl }: PlaylistProps) {
 	const [isHovered, setIsHovered] = useState(false);
-	const router = useRouter();
 
 	return (
-		<div
+		<Link
+			href={`/playlist/${playlist.id}`}
 			key={playlist.id}
 			className="flex gap-3 p-3 hover:bg-accent hover:rounded-md hover:cursor-pointer relative"
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
-			onClick={() => router?.push(`/playlist/${playlist.id}`)}
 		>
 			<Avatar className="size-12">
 				<AvatarImage src={photoUrl} className="rounded-sm relative" />
@@ -35,6 +35,6 @@ export default function PlaylistCard({ playlist, photoUrl }: PlaylistProps) {
 					Playlist · {playlist.owner.display_name}
 				</p>
 			</div>
-		</div>
+		</Link>
 	);
 }

@@ -11,7 +11,7 @@ export default async function Page({
 	const playlist = await getPlaylist(playlistId);
 
 	return (
-		<div className="w-full relative">
+		<div className="w-full relative overflow-y-scroll scrollbar">
 			<PlaylistHeader playlist={playlist} />
 			<PlaylistTracks playlist_id={playlistId} />
 		</div>

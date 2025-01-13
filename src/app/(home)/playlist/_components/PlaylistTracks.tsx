@@ -24,7 +24,7 @@ export default async function PlaylistTracks({
 }) {
 	const data: PlaylistResponse = await getPlaylistTracks(playlist_id);
 	return (
-		<div className="w-full h-full bg-transparent/20 -translate-y-[13rem] overflow-auto">
+		<div className="w-full h-full bg-transparent/20 -translate-y-[13rem]">
 			<div className="p-6 flex flex-col gap-4">
 				{data.items.map(({ track }, index) => (
 					<TrackCard key={index} track={track} index={index} />
