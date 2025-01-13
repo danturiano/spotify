@@ -1,4 +1,4 @@
-import NextAuth, { Session } from 'next-auth';
+import NextAuth from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import Spotify from 'next-auth/providers/spotify';
 
@@ -8,11 +8,7 @@ interface ExtendedToken extends JWT {
 	refreshToken?: string;
 	accessTokenExpires?: number;
 	error?: string;
-}
-
-interface ExtendedSession extends Session {
-	accessToken?: string;
-	accessTokenExpires?: number;
+	expires?: string;
 }
 
 const scopes = [
@@ -27,47 +23,6 @@ const LOGIN_URL = `https://accounts.spotify.com/authorize?scope=${encodeURICompo
 	scopes
 )}`;
 
-async function refreshAccessToken(
-	token: ExtendedToken
-): Promise<ExtendedToken> {
-	try {
-		const params = new URLSearchParams();
-		params.append('grant_type', 'refresh_token');
-		params.append('refresh_token', token.refreshToken!);
-
-		const response = await fetch('https://accounts.spotify.com/api/token', {
-			method: 'POST',
-			headers: {
-				Authorization:
-					'Basic ' +
-					Buffer.from(
-						process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_SECRET
-					).toString('base64'),
-			},
-			body: params,
-		});
-
-		const data = await response.json();
-
-		if (!response.ok) {
-			throw new Error('Failed to refresh access token');
-		}
-
-		return {
-			...token,
-			accessToken: data.access_token,
-			refreshToken: data.refresh_token ?? token.refreshToken,
-			accessTokenExpires: Date.now() + data.expires_in * 1000,
-		};
-	} catch (error) {
-		console.log(error);
-		return {
-			...token,
-			error: 'RefreshAccessTokenError',
-		};
-	}
-}
-
 export const { handlers, auth, signIn, signOut } = NextAuth({
 	providers: [
 		Spotify({
@@ -81,26 +36,59 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 		authorized({ auth }) {
 			return !!auth?.user;
 		},
-		async jwt({ token, account }): Promise<ExtendedToken> {
+		async jwt({ token, account }) {
 			// Initial sign in
 			if (account) {
 				return {
 					...token,
 					accessToken: account.access_token,
 					refreshToken: account.refresh_token,
-					accessTokenExpires: account.expires_at! * 1000, // convert to ms
+					accessTokenExpires: account.expires_at,
 				};
 			}
 
-			// Return token if access token hasn't expired
-			if (token.accessTokenExpires && Date.now() < token.accessTokenExpires) {
-				return token;
+			const now = Math.floor(Date.now() / 1000);
+			const difference = Math.floor((token.accessTokenExpires! - now) / 60);
+			const refreshToken = token.refreshToken;
+			console.log(`Token still active for ${difference} minutes.`);
+
+			if (difference <= 2) {
+				const request = await fetch('https://accounts.spotify.com/api/token', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+						Authorization: `Basic ${Buffer.from(
+							`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_SECRET}`
+						).toString('base64')}`,
+					},
+					body: `grant_type=refresh_token&refresh_token=${refreshToken}`,
+					cache: 'no-cache',
+				});
+
+				if (request.ok) {
+					const response = await request.json();
+					const { access_token, expires_in, refresh_token } = response;
+					const timestamp = Math.floor((Date.now() + expires_in * 1000) / 1000);
+
+					console.log(response);
+					console.log(`New access token: ${access_token}`);
+
+					return {
+						...token,
+						accessToken: access_token,
+						accessTokenExpires: timestamp,
+						refreshToken: refresh_token,
+					};
+				} else {
+					console.error(
+						`Failed to refresh token: ${request.status} ${request.statusText}`
+					);
+				}
 			}
 
-			// Access token expired, refresh it
-			return await refreshAccessToken(token);
+			return token;
 		},
-		async session({ session, token }): Promise<ExtendedSession> {
+		async session({ session, token }) {
 			return {
 				...session,
 				accessToken: token.accessToken,
