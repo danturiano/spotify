@@ -52,7 +52,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 			const refreshToken = token.refreshToken;
 			console.log(`Token still active for ${difference} minutes.`);
 
-			if (difference <= 2) {
+			if (difference <= 10) {
 				const request = await fetch('https://accounts.spotify.com/api/token', {
 					method: 'POST',
 					headers: {

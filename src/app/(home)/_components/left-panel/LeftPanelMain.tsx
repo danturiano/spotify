@@ -1,4 +1,4 @@
-import Playlist from './Playlist';
+import Playlist from './UserPlaylist';
 
 export default async function LeftPanelMain() {
 	return (

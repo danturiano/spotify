@@ -113,7 +113,7 @@ export async function getPlaylist(playlist_id: string) {
 			throw new Error(`HTTP error! status: ${response.status}`);
 		}
 
-		const data = response.json();
+		const data = await response.json();
 
 		return data;
 	} catch (error) {
@@ -131,7 +131,7 @@ export async function getUserPlaylist() {
 
 	try {
 		const response = await fetch(
-			`https://api.spotify.com/v1/users/${user_id}/playlists?offset=0&limit=20`,
+			`https://api.spotify.com/v1/users/${user_id}/playlists?limit=20`,
 			{
 				cache: 'force-cache',
 				next: { revalidate: 3600 },

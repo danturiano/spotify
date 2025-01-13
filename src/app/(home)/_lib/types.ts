@@ -33,74 +33,57 @@ export type SpotifyPlaylist = {
 	uri: string;
 };
 
-export type Track = {
-	album: {
-		album_type: string;
-		total_tracks: number;
-		available_markets: string[];
-		external_urls: {
-			spotify: string;
-		};
-		href: string;
-		id: string;
-		images: {
-			url: string;
-			height: number;
-			width: number;
-		}[];
-		name: string;
-		release_date: string;
-		release_date_precision: string;
-		restrictions?: {
-			reason: string;
-		};
-		type: string;
-		uri: string;
-		artists: {
-			external_urls: {
-				spotify: string;
-			};
-			href: string;
-			id: string;
-			name: string;
-			type: string;
-			uri: string;
-		}[];
-	};
-	artists: {
-		external_urls: {
-			spotify: string;
-		};
-		href: string;
-		id: string;
-		name: string;
-		type: string;
-		uri: string;
-	}[];
-	available_markets: string[];
-	disc_number: number;
-	duration_ms: number;
-	explicit: boolean;
-	external_ids: {
-		isrc: string;
-		ean: string;
-		upc: string;
-	};
-	external_urls: {
-		spotify: string;
-	};
+export interface ExternalUrls {
+	spotify: string;
+}
+
+export interface Artist {
+	external_urls: ExternalUrls;
 	href: string;
 	id: string;
-	is_playable: boolean;
-	linked_from?: Record<string, unknown>;
-	restrictions?: {
-		reason: string;
-	};
+	name: string;
+	type: 'artist';
+	uri: string;
+}
+
+export interface Image {
+	url: string;
+	height: number;
+	width: number;
+}
+
+export interface Album {
+	album_type: 'compilation' | 'single' | 'album';
+	artists: Artist[];
+	available_markets: string[];
+	external_urls: ExternalUrls;
+	href: string;
+	id: string;
+	images: Image[];
+	name: string;
+	release_date: string;
+	total_tracks: number;
+	type: 'album';
+	uri: string;
+}
+
+export interface Track {
+	album: Album;
+	artists: Artist[];
+	duration_ms: number;
+	explicit: boolean;
+	external_urls: ExternalUrls;
+	href: string;
+	id: string;
 	name: string;
 	popularity: number;
 	preview_url: string | null;
 	track_number: number;
-	type: string;
+	type: 'track';
 	uri: string;
-	is_local: boolean;
-};
+}
+
+export interface TrackCardProps {
+	track: Track;
+	index: number;
+}

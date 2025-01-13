@@ -13,7 +13,7 @@ export default async function Page({
 	return (
 		<div className="w-full relative">
 			<PlaylistHeader playlist={playlist} />
-			<PlaylistTracks />
+			<PlaylistTracks playlist_id={playlistId} />
 		</div>
 	);
 }

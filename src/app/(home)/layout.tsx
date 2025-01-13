@@ -5,7 +5,7 @@ import {
 } from '@/components/ui/resizable';
 import React from 'react';
 import LeftPanelHeader from './_components/left-panel/LeftPanelHeader';
-import Playlist from './_components/left-panel/Playlist';
+import Playlist from './_components/left-panel/UserPlaylist';
 import Navigation from './_components/Navigation';
 
 export default function HomeLayout({
