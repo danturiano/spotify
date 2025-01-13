@@ -10,6 +10,7 @@ export default function PlaylistHeader({
 	playlist: SpotifyPlaylist;
 }) {
 	const image = playlist.images[0].url;
+	const totalHrs = (playlist.tracks.total * 180) / 60 / 60;
 
 	const { dominantColor } = useExtractColors(image, {
 		format: 'hsl',
@@ -27,11 +28,23 @@ export default function PlaylistHeader({
 				<Avatar className="size-56 rounded-md shadow-md">
 					<AvatarImage src={image} />
 				</Avatar>
-				<div className="flex flex-col max-w-[80%]">
-					<p>Playlist</p>
-					<h1 className="text-6xl font-extrabold text-primary-foreground text-nowrap">
-						{playlist.name}
-					</h1>
+				<div className="flex flex-col max-w-[80%] gap-4 items-start">
+					<div className="flex flex-col gap-2">
+						<p className="text-sm capitalize text-primary-foreground/95">
+							{playlist.type}
+						</p>
+						<h1 className="text-6xl font-extrabold text-primary-foreground text-nowrap">
+							{playlist.name}
+						</h1>
+					</div>
+					<div className="flex text-xs gap-2">
+						<p className="font-medium">
+							<span className="font-bold text-primary-foreground">
+								{playlist.owner.display_name} ● ‎
+							</span>
+							{playlist.tracks.total} songs, about {totalHrs.toFixed()} hrs
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>
