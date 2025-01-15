@@ -1,5 +1,9 @@
-import { getPlaylistTracks } from '../../_lib/data-service';
-import { Track } from '../../_lib/types';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { Check, Play, Plus } from 'lucide-react';
+import { getPlaylistTracks, getUserPlaylist } from '../../_lib/data-service';
+import { SpotifyPlaylist, Track } from '../../_lib/types';
+import RowHeader from './RowHeader';
 import TrackCard from './TrackCard';
 
 interface PlaylistResponse {
@@ -23,12 +27,37 @@ export default async function PlaylistTracks({
 	playlist_id: string;
 }) {
 	const data: PlaylistResponse = await getPlaylistTracks(playlist_id);
+	const userPlaylist = await getUserPlaylist();
+	const isAddedToLibrary = userPlaylist.items.some(
+		(playlist: SpotifyPlaylist) => playlist.id === playlist_id
+	);
+
 	return (
 		<div className="w-full h-full bg-transparent/20 -translate-y-[13rem]">
 			<div className="p-6 flex flex-col gap-4">
-				{data.items.map(({ track }, index) => (
-					<TrackCard key={index} track={track} index={index} />
-				))}
+				<div className="grid grid-cols-2">
+					<div className="flex gap-4 items-center">
+						<Button className="rounded-full bg-spotify size-14" iconSize={'sm'}>
+							<Play />
+						</Button>
+						<div className="flex gap-2">
+							<Button
+								className="rounded-full size-9 border-2 border-secondary bg-transparent text-secondary"
+								iconSize={'sm'}
+							>
+								{isAddedToLibrary ? <Check /> : <Plus />}
+							</Button>
+						</div>
+					</div>
+					<div className="grid grid-cols-3 text-xs items-center"></div>
+				</div>
+				<RowHeader />
+				<Separator className=" bg-muted-foreground" />
+				<div>
+					{data.items.map(({ track }, index) => (
+						<TrackCard key={index} track={track} index={index} />
+					))}
+				</div>
 			</div>
 		</div>
 	);

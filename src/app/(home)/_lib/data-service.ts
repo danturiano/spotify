@@ -181,3 +181,5 @@ export async function getPlaylistTracks(playlist_id: string) {
 		console.error(error);
 	}
 }
+
+export async function checkUserLibrary(playlist_id: string) {}
