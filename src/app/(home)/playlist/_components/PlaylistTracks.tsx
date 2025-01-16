@@ -42,7 +42,11 @@ export default async function PlaylistTracks({
 						</Button>
 						<div className="flex gap-2">
 							<Button
-								className="rounded-full size-9 border-2 border-secondary bg-transparent text-secondary"
+								className={`rounded-full size-9 text-secondary ${
+									isAddedToLibrary
+										? 'bg-spotify text-primary'
+										: 'border-2 border-secondary bg-transparent'
+								}`}
 								iconSize={'sm'}
 							>
 								{isAddedToLibrary ? <Check /> : <Plus />}
