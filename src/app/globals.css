@@ -71,8 +71,3 @@ body {
     @apply bg-background text-foreground;
   }
 }
-
-.custom-scrollbar {
-  scrollbar-width: "auto";
-  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-}

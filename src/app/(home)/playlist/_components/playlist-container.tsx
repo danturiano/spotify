@@ -55,7 +55,7 @@ export default function PlaylistContainer({
   }, [entry]);
 
   return (
-    <div className="w-full h-screen overflow-y-auto bg-primary relative">
+    <div className="w-full h-screen overflow-y-auto bg-primary relative rounded-md scrollbar-none">
       {showSecondaryHeader && (
         <div
           className="sticky top-0 h-14 z-50 w-full transition-all duration-300 ease-in-out"

@@ -7,7 +7,7 @@ export default async function Playlist() {
   const data = await getUserPlaylist();
 
   return (
-    <div className="overflow-y-scroll h-screen w-full">
+    <div className="overflow-y-scroll h-screen w-full scrollbar-none">
       <SearchButton />
       {data.items.map((item: SpotifyPlaylist) => {
         const photoUrl = item.images[0]?.url;
