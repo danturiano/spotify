@@ -14,7 +14,7 @@ export default function TrackCard({ track, index }: TrackCardProps) {
 
   return (
     <div
-      className="grid grid-cols-2 hover:bg-neutral-600/40 rounded-md px-2 py-2 data-[state=open]:bg-red-500"
+      className="grid grid-cols-2 hover:bg-neutral-600/40 rounded-md px-2 py-2"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

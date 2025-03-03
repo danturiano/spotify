@@ -6,7 +6,7 @@ import {
 import React from "react";
 import LeftPanelHeader from "./_components/left-panel/LeftPanelHeader";
 import Playlist from "./_components/left-panel/UserPlaylist";
-import Navigation from "./_components/Navigation";
+import Navigation from "./_components/navigation";
 
 export default function HomeLayout({
   children,
@@ -14,17 +14,11 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-screen flex flex-col relative">
-      <header>
-        <Navigation />
-      </header>
-      <main className="flex-1 px-2 h-full">
+    <div className="h-screen flex flex-col">
+      <Navigation />
+      <main className="px-4">
         <ResizablePanelGroup direction="horizontal" className="gap-1">
-          <ResizablePanel
-            defaultSize={22}
-            minSize={15}
-            className="flex flex-col"
-          >
+          <ResizablePanel defaultSize={22} minSize={15}>
             <div className="flex flex-col justify-between bg-primary rounded-lg">
               <LeftPanelHeader />
               <Playlist />

@@ -72,13 +72,7 @@ body {
   }
 }
 
-/* .scrollbar::-webkit-scrollbar {
-  width: 12px;
-  max-height: 12px;
-  border-radius: 12px;
+.custom-scrollbar {
+  scrollbar-width: "auto";
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
-
-.scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #3b3b3b;
-  max-height: 12px;
-} */

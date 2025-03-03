@@ -33,7 +33,7 @@ export default async function PlaylistTracks({
   );
 
   return (
-    <div className="w-full bg-transparent/20 -translate-y-[13rem]">
+    <div className="w-full bg-transparent/20 -translate-y-2">
       <div className="p-6 flex flex-col gap-4">
         <div className="grid grid-cols-2">
           <div className="flex gap-4 items-center">

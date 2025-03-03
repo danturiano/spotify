@@ -1,4 +1,5 @@
 import { getPlaylist } from "../../_lib/data-service";
+import PlaylistContainer from "../_components/playlist-container";
 import PlaylistHeader from "../_components/PlaylistHeader";
 import PlaylistTracks from "../_components/PlaylistTracks";
 
@@ -11,9 +12,9 @@ export default async function Page({
   const playlist = await getPlaylist(playlistId);
 
   return (
-    <div className="w-full max-h-full rounded-md relative bg-primary overflow-y-auto">
+    <PlaylistContainer playlist={playlist}>
       <PlaylistHeader playlist={playlist} />
       <PlaylistTracks playlist_id={playlistId} />
-    </div>
+    </PlaylistContainer>
   );
 }

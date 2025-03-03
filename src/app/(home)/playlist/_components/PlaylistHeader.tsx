@@ -1,7 +1,6 @@
 "use client";
 
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
-import { useExtractColors } from "react-extract-colors";
 import { SpotifyPlaylist } from "../../_lib/types";
 
 export default function PlaylistHeader({
@@ -12,20 +11,10 @@ export default function PlaylistHeader({
   const image = playlist.images[0].url;
   const totalHrs = (playlist.tracks.total * 180) / 60 / 60;
 
-  const { dominantColor } = useExtractColors(image, {
-    format: "hsl",
-    sortBy: "vibrance",
-  });
-
   return (
-    <div
-      className={`p-6 flex items-start w-full rounded-t-lg h-[30rem]`}
-      style={{
-        background: `linear-gradient(180deg, ${dominantColor} 0%, #121212 100%)`,
-      }}
-    >
+    <div className="w-full relative h-[18rem] p-6">
       <div className="flex align-bottom items-end gap-4 min-w-0">
-        <Avatar className="min-h-[14rem] min-w-[14rem] size-56 rounded-md shadow-md">
+        <Avatar className="min-h-[14rem] min-w-[14rem] size-56 shadow-md">
           <AvatarImage src={image} />
         </Avatar>
         <div className="flex flex-col gap-4 items-start min-w-0">
