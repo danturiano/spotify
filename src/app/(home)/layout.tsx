@@ -4,8 +4,8 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import React from "react";
-import LeftPanelHeader from "./_components/left-panel/LeftPanelHeader";
-import Playlist from "./_components/left-panel/UserPlaylist";
+import LeftPanelHeader from "./_components/left-panel/left-panel-header";
+import Playlist from "./_components/left-panel/user-playlist";
 import Navigation from "./_components/navigation";
 
 export default function HomeLayout({

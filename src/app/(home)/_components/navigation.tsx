@@ -2,7 +2,7 @@ import Logo from "@/components/logo";
 import { Input } from "@/components/ui/input";
 import { Home, Search } from "lucide-react";
 import Link from "next/link";
-import UserProfile from "./UserProfile";
+import UserProfile from "./user-profile";
 
 export default function Navigation() {
   return (

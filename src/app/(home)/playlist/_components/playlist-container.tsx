@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useExtractColors } from "react-extract-colors";
 import { useInView } from "react-intersection-observer";
 import { SpotifyPlaylist } from "../../_lib/types";
-import RowHeader from "./RowHeader";
+import RowHeader from "./row-header";
 
 type PlaylistContainerProps = {
   children: React.ReactNode;

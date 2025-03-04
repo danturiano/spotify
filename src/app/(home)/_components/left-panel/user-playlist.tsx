@@ -1,7 +1,7 @@
 import { getUserPlaylist } from "../../_lib/data-service";
 import { SpotifyPlaylist } from "../../_lib/types";
-import PlaylistCard from "./PlaylistCard";
-import SearchButton from "./SearchButton";
+import PlaylistCard from "./playlist-card";
+import SearchButton from "./search-button";
 
 export default async function Playlist() {
   const data = await getUserPlaylist();

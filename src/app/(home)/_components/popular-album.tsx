@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
 import { Button } from "@/components/ui/button";
 
-import PopularAlbumCard from "./PopularAlbumCard";
+import PopularAlbumCard from "./popular-album-card";
 
 export default async function PopularAlbum() {
   // const { data: albums } = await getPopularAlbum();

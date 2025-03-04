@@ -3,8 +3,8 @@ import { Separator } from "@/components/ui/separator";
 import { Check, Play, Plus } from "lucide-react";
 import { getPlaylistTracks, getUserPlaylist } from "../../_lib/data-service";
 import { SpotifyPlaylist, Track } from "../../_lib/types";
-import RowHeader from "./RowHeader";
-import TrackCard from "./TrackCard";
+import RowHeader from "./row-header";
+import TrackCard from "./track-card";
 
 interface PlaylistResponse {
   items: {

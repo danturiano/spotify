@@ -1,9 +1,8 @@
 import { Button } from "@/components/ui/button";
-import PopularArtistCard from "./PopularArtistCard";
+import PopularArtistCard from "./popoular-artist-card";
 import { getPopularArtist } from "../_lib/actions";
 
 export default async function PopularArtist() {
-
   const artists = await getPopularArtist();
   if (!artists) {
     return null;

@@ -1,7 +1,7 @@
 import { getPlaylist } from "../../_lib/data-service";
 import PlaylistContainer from "../_components/playlist-container";
-import PlaylistHeader from "../_components/PlaylistHeader";
-import PlaylistTracks from "../_components/PlaylistTracks";
+import PlaylistHeader from "../_components/playlist-header";
+import PlaylistTracks from "../_components/playlist-tracks";
 
 export default async function Page({
   params,
