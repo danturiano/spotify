@@ -1,10 +1,13 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { darkenHSL } from "@/lib/utils";
+import { Play } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useExtractColors } from "react-extract-colors";
 import { useInView } from "react-intersection-observer";
 import { SpotifyPlaylist } from "../../_lib/types";
-import { darkenHSL } from "@/lib/utils";
+import RowHeader from "./RowHeader";
 
 type PlaylistContainerProps = {
   children: React.ReactNode;
@@ -24,7 +27,7 @@ export default function PlaylistContainer({
 
   const { ref, inView, entry } = useInView({
     threshold: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
-    rootMargin: "-150px 0px 0px 0px",
+    rootMargin: "-120px 0px 0px 0px",
   });
 
   const [opacity, setOpacity] = useState(0);
@@ -58,12 +61,24 @@ export default function PlaylistContainer({
     <div className="w-full h-screen overflow-y-auto bg-primary relative rounded-md scrollbar-none">
       {showSecondaryHeader && (
         <div
-          className="sticky top-0 h-14 z-50 w-full transition-all duration-300 ease-in-out"
+          className="sticky top-0 flex items-center py-2 px-4 z-30 w-full transition-all duration-300 ease-in-out"
           style={{
             backgroundColor: `${darkenHSL(dominantColor!, 30)}`,
             opacity: opacity.toFixed(2),
           }}
-        ></div>
+        >
+          <div className="flex space-x-2 items-center">
+            <Button className="rounded-full bg-spotify size-11" iconSize={"sm"}>
+              <Play />
+            </Button>
+            <p className="text-2xl tracking-tight font-bold">{playlist.name}</p>
+          </div>
+        </div>
+      )}
+      {showSecondaryHeader && opacity === 1 && (
+        <div className="sticky top-[57px] w-full z-40 bg-secondary-foreground h-10 px-6 flex items-center justify-between border-b border-accent">
+          <RowHeader />
+        </div>
       )}
       <div
         ref={ref}

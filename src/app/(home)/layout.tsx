@@ -25,7 +25,7 @@ export default function HomeLayout({
             </div>
           </ResizablePanel>
           <ResizableHandle className="bg-background" />
-          <ResizablePanel defaultSize={78} minSize={78}>
+          <ResizablePanel defaultSize={78} minSize={74}>
             {children}
           </ResizablePanel>
         </ResizablePanelGroup>
