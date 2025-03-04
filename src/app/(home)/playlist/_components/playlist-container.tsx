@@ -25,7 +25,7 @@ export default function PlaylistContainer({
     sortBy: "vibrance",
   });
 
-  const { ref, inView, entry } = useInView({
+  const { ref, entry } = useInView({
     threshold: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
     rootMargin: "-120px 0px 0px 0px",
   });

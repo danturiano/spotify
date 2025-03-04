@@ -21,7 +21,8 @@ export function msToMinutesAndSeconds(ms: number): string {
   return `${minutes}:${seconds.toString().padStart(2, "0")}`; // Format as "minutes:seconds"
 }
 
-export const darkenHSL = (hsl: string | undefined, percent: number): string => {
+export const darkenHSL = (hsl: string, percent: number): string | null => {
+  if (!hsl) return null;
   // Extract H, S, and L values using regex
   const match = hsl?.match(/hsl\(\s*(\d+),\s*(\d+)%,\s*(\d+)%\s*\)/);
   if (!match) {
