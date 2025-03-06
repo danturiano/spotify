@@ -1,13 +1,17 @@
 "use client";
 
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
-import { SpotifyPlaylist } from "../../_lib/types";
+import { SpotifyPlaylist, SpotifyUser } from "../../_lib/types";
+
+type PlaylistHeaderProps = {
+  playlist_details: SpotifyPlaylist;
+  profile: SpotifyUser;
+};
 
 export default function PlaylistHeader({
   playlist_details,
-}: {
-  playlist_details: SpotifyPlaylist;
-}) {
+  profile,
+}: PlaylistHeaderProps) {
   const image = playlist_details.images[0].url;
   const totalHrs = (playlist_details.tracks.total * 180) / 60 / 60;
 
@@ -27,13 +31,24 @@ export default function PlaylistHeader({
             </h1>
           </div>
           <div className="flex text-xs gap-2">
-            <p className="font-medium">
+            <div className="flex items-center space-x-1">
+              {profile.images[0]?.url && (
+                <Avatar>
+                  <AvatarImage
+                    src={profile.images[0].url}
+                    className="rounded-full h-6 w-6"
+                  />
+                </Avatar>
+              )}
               <span className="font-bold text-primary-foreground">
                 {playlist_details.owner.display_name} ● ‎
               </span>
-              {playlist_details.tracks.total} songs, about {totalHrs.toFixed()}{" "}
-              {totalHrs > 1 && totalHrs < 2 ? "hr" : "hrs"}
-            </p>
+              <p>
+                {playlist_details.tracks.total} songs, about{" "}
+                {totalHrs.toFixed()}{" "}
+                {totalHrs > 1 && totalHrs < 2 ? "hr" : "hrs"}
+              </p>
+            </div>
           </div>
         </div>
       </div>

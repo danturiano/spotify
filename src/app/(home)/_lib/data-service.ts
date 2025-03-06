@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
-import { SpotifyArtist, SpotifyPlaylist } from "./types";
+import { SpotifyArtist, SpotifyPlaylist, SpotifyUser } from "./types";
 
 const artistIds = [
   "1vCWHaC5f2uS3yhpwWbIA6",
@@ -210,6 +210,38 @@ export async function getPlaylistRecommendation(playlist: SpotifyPlaylist[]) {
     return data;
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function getSpotifyUserProfile(
+  user_id: string
+): Promise<SpotifyUser> {
+  const session = await auth();
+  if (!session) {
+    throw new Error("No session found");
+  }
+  try {
+    const response = await fetch(
+      `https://api.spotify.com/v1/users/${user_id}`,
+      {
+        cache: "force-cache",
+        next: { revalidate: 3600 },
+        headers: {
+          Authorization: `Bearer ${session.accessToken}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data: SpotifyUser = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 }
 
