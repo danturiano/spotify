@@ -33,7 +33,8 @@ export default async function PlaylistTracks({
   );
 
   return (
-    <div className="w-full bg-transparent/20 -translate-y-2">
+    <div className="w-full -translate-y-2">
+      <div className="absolute w-full h-96 bg-gradient-to-b from-transparent/20 to-[hsl(0,0%,7.06%)] -z-50"></div>
       <div className="p-6 flex flex-col gap-4">
         <div className="grid grid-cols-2">
           <div className="flex gap-4 items-center">

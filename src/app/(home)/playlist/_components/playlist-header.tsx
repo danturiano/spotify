@@ -4,12 +4,12 @@ import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { SpotifyPlaylist } from "../../_lib/types";
 
 export default function PlaylistHeader({
-  playlist,
+  playlist_details,
 }: {
-  playlist: SpotifyPlaylist;
+  playlist_details: SpotifyPlaylist;
 }) {
-  const image = playlist.images[0].url;
-  const totalHrs = (playlist.tracks.total * 180) / 60 / 60;
+  const image = playlist_details.images[0].url;
+  const totalHrs = (playlist_details.tracks.total * 180) / 60 / 60;
 
   return (
     <div className="w-full relative h-[18rem] p-6">
@@ -20,18 +20,19 @@ export default function PlaylistHeader({
         <div className="flex flex-col gap-4 items-start min-w-0">
           <div className="flex flex-col gap-2 max-w-full">
             <p className="text-sm capitalize text-primary-foreground/95">
-              {playlist.type}
+              {playlist_details.type}
             </p>
             <h1 className="text-6xl font-extrabold truncate text-primary-foreground">
-              {playlist.name}
+              {playlist_details.name}
             </h1>
           </div>
           <div className="flex text-xs gap-2">
             <p className="font-medium">
               <span className="font-bold text-primary-foreground">
-                {playlist.owner.display_name} ● ‎
+                {playlist_details.owner.display_name} ● ‎
               </span>
-              {playlist.tracks.total} songs, about {totalHrs.toFixed()} hrs
+              {playlist_details.tracks.total} songs, about {totalHrs.toFixed()}{" "}
+              {totalHrs > 1 && totalHrs < 2 ? "hr" : "hrs"}
             </p>
           </div>
         </div>

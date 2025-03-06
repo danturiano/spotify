@@ -93,7 +93,7 @@ export async function getTopArtist(accessToken: string | undefined) {
   }
 }
 
-export async function getPlaylist(playlist_id: string) {
+export async function getPlaylistDetails(playlist_id: string) {
   const session = await auth();
   if (!session) {
     throw new Error("No session found");
@@ -101,7 +101,7 @@ export async function getPlaylist(playlist_id: string) {
 
   try {
     const response = await fetch(
-      `https://api.spotify.com/v1/playlists/${playlist_id}`,
+      `https://api.spotify.com/v1/playlists/${playlist_id}?fields=fields%3Dcollaborative%2Cdescription%2Cexternal_urls%2Cfollowers%2Chref%2Cid%2Cimages%2Cname%2Cowner%2Cpublic%2Csnapshot_id%2Ctype%2Curi%2Ctracks%28total%29&locale=en-US%2Cen%3Bq%3D0.5`,
       {
         cache: "force-cache",
         next: { revalidate: 3600 },
@@ -163,6 +163,35 @@ export async function getPlaylistTracks(playlist_id: string) {
   try {
     const response = await fetch(
       `https://api.spotify.com/v1/playlists/${playlist_id}/tracks`,
+      {
+        cache: "force-cache",
+        next: { revalidate: 3600 },
+        headers: {
+          Authorization: `Bearer ${session.accessToken}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = response.json();
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getPlaylistRecommendation(playlist: SpotifyPlaylist[]) {
+  const session = await auth();
+  if (!session) {
+    throw new Error("No session found");
+  }
+  try {
+    const response = await fetch(
+      `https://api.spotify.com/v1/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry&seed_tracks=0c6xIDDpzE81m2q797ordA`,
       {
         cache: "force-cache",
         next: { revalidate: 3600 },

@@ -11,14 +11,14 @@ import RowHeader from "./row-header";
 
 type PlaylistContainerProps = {
   children: React.ReactNode;
-  playlist: SpotifyPlaylist;
+  playlist_details: SpotifyPlaylist;
 };
 
 export default function PlaylistContainer({
   children,
-  playlist,
+  playlist_details,
 }: PlaylistContainerProps) {
-  const image = playlist.images[0].url;
+  const image = playlist_details.images[0].url;
 
   const { dominantColor } = useExtractColors(image, {
     format: "hsl",
@@ -58,7 +58,7 @@ export default function PlaylistContainer({
   }, [entry]);
 
   return (
-    <div className="w-full h-screen overflow-y-auto bg-primary relative rounded-md scrollbar-none">
+    <div className="w-full h-screen bg-primary overflow-y-auto relative rounded-md scrollbar-none">
       {showSecondaryHeader && (
         <div
           className="sticky top-0 flex items-center py-2 px-4 z-30 w-full transition-all duration-300 ease-in-out"
@@ -71,7 +71,9 @@ export default function PlaylistContainer({
             <Button className="rounded-full bg-spotify size-11" iconSize={"sm"}>
               <Play />
             </Button>
-            <p className="text-2xl tracking-tight font-bold">{playlist.name}</p>
+            <p className="text-2xl tracking-tight font-bold">
+              {playlist_details.name}
+            </p>
           </div>
         </div>
       )}
