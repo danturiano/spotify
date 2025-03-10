@@ -8,6 +8,7 @@ import { useExtractColors } from "react-extract-colors";
 import { useInView } from "react-intersection-observer";
 import { SpotifyPlaylist } from "../../_lib/types";
 import RowHeader from "./row-header";
+import SpotifyFooter from "../../_components/spotify-footer";
 
 type PlaylistContainerProps = {
   children: React.ReactNode;
@@ -90,6 +91,7 @@ export default function PlaylistContainer({
         }}
       ></div>
       {children}
+      <SpotifyFooter />
     </div>
   );
 }
